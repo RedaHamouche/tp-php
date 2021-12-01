@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER["DOCUMENT_ROOT"] . "/bootstrap.php";
+
 $dsn = 'mysql:host=db';
 $user = 'root';
 $pwd = 'example';
@@ -21,3 +23,5 @@ switch ($path[1]) {
         echo "index";
         break;
 }
+
+echo PROJECT_PATH;
