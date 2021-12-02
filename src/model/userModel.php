@@ -7,7 +7,7 @@ class UserModel{
     }
 
     public function insertUser($firstname, $lastname, $email, $admin) {
-        $bdd = dbConnect();
+        $bdd = data::dbConnect();
         $pass_hache =  password_hash($_POST['pass'], PASSWORD_DEFAULT);
         $req = $bdd->prepare("INSERT INTO member(firstname , lastname, email, pass, administrator) VALUES(:firstname, :lastname,  :email,  :pass, :administrator)");
         
