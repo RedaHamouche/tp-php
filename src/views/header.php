@@ -26,13 +26,21 @@
       <li class="nav-item active">
         <a class="nav-link" href="/addView">Ajouter un article <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      
         <?php if($_SESSION['currentUser']) { ?>
-            <a class="nav-link" href="/logout">Log out</a>
-            <p class="nav-link">Bonjour <?= $_SESSION['currentUser'] ?></p>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log out</a>
+            </li>
+            <li class="nav-item">
+                <p class="nav-link">Bonjour <?= $_SESSION['currentUser'] ?></p>
+            </li>
         <?php } else { ?>
-            <a class="nav-link" href="/signup">Sign up</a>
-            <a class="nav-link" href="/login">Log in</a>
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">Sign up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Log in</a>
+            </li>
         <?php } ?>
       </li>
     </ul>
