@@ -1,5 +1,4 @@
 <?php 
-
 class PostModel{
 
     public function post(){
@@ -15,7 +14,7 @@ class PostModel{
             $requete->execute(array(
                 'content' => $_POST['content'],
                 'title' => $_POST['title'],
-                'author' => 'louis'
+                'author' => $_SESSION['currentUser']
             ));
         }
     }
