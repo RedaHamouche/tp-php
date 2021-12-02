@@ -24,4 +24,23 @@ class UserModel{
             $_SESSION['currentUser'] = $firstname . ' ' . $lastname;
         }
     }
+
+    public function checkAccount($email, $pass){
+        $bdd = data::dbConnect();
+        $member = $bdd->prepare("SELECT email, pass, firstname, lastname FROM member WHERE email = :email");
+        $member->execute([
+            'email' => $email,
+        ]);
+        $member_data = $member->fetch();
+        if (!$member_data){
+            return false;
+        }
+        $ispasscorrect = password_verify($pass, $member_data['pass']);
+        if($ispasscorrect == 1){
+            $_SESSION['currentUser'] =  $member_data['firstname'] . ' ' .  $member_data['lastname'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

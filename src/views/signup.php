@@ -1,7 +1,5 @@
 <?php
-$article = FrontEndController::showPost($_GET['articleId']);
 require_once $_SERVER["DOCUMENT_ROOT"]."/views/header.php";
-echo $_SESSION['currentUser'];
 ?>
 <body>
 <div class="form m-4">
@@ -10,6 +8,7 @@ echo $_SESSION['currentUser'];
       <?= FlashController::getFlash(); ?>
     </div
   <?php endif; ?>
+  <div></div>
   <form action="/addUser" method="post">
     <label>First Name : </label>
     <input type="text" name="firstname"/><br />

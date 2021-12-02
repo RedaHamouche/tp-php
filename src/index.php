@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+ini_set('display_errors',1); 
+error_reporting(E_ALL);
 require_once $_SERVER["DOCUMENT_ROOT"]."/config/bootstrap.php";
 require($_SERVER["DOCUMENT_ROOT"]."/controller/FrontEndController.php");
 
@@ -31,6 +32,13 @@ switch ($path[0]) {
     case '/logout':
         session_destroy();
         header('Location: /views/listView.php');
+        break;
+    case '/login':
+        require PROJECTPATH . "/views/login.php";
+        break;
+    case '/logUser':
+        UserController::logUser($_POST['email'], $_POST['pass']);
+        echo $_POST['email'];
         break;
     default:
         require PROJECTPATH . "/views/listView.php";

@@ -27,7 +27,7 @@
         <a class="nav-link" href="/addView">Ajouter un article <span class="sr-only">(current)</span></a>
       </li>
       
-        <?php if($_SESSION['currentUser']) { ?>
+        <?php if(isset($_SESSION['currentUser'])) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Log out</a>
             </li>
