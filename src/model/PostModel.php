@@ -9,12 +9,12 @@ class PostModel{
     public function insertPost($content) {
        
         $bdd = data::dbConnect();
-    
-        $requete = $bdd->prepare('INSERT INTO article(author, content, content_date) VALUES (:author, :content, NOW() )');
+        $requete = $bdd->prepare('INSERT INTO article(title, author, content, content_date) VALUES (:title, :author, :content, NOW())');
 
         if(!empty($_POST['content'])) {
             $requete->execute(array(
                 'content' => $_POST['content'],
+                'title' => $_POST['title'],
                 'author' => 'louis'
             ));
         }

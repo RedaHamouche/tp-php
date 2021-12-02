@@ -20,6 +20,13 @@ switch ($path[0]) {
         FrontEndController::showPost($_GET['articleId']);
         require PROJECTPATH . "/views/showView.php";
         break;
+    case '/signup':
+        require PROJECTPATH . "/views/signup.php";
+        break;
+    case '/addUser':
+        UserController::addUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass'], $_POST['admin']);
+        require PROJECTPATH . "/views/signup.php";
+        break;
     default:
         require PROJECTPATH . "/views/listView.php";
         break;
