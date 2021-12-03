@@ -1,9 +1,8 @@
 <?php
-$values = FrontEndController::getPost();
 require_once $_SERVER["DOCUMENT_ROOT"]."/views/header.php";
 ?>
 <body>
-<?php foreach($values as $article) :?>
+<?php foreach($articles as $article) :?>
     <div class="card mx-4 my-3">
         
         <div class="card-body">

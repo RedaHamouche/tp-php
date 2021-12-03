@@ -1,5 +1,4 @@
 <?php
-$article = FrontEndController::showPost($_GET['articleId']);
 require_once $_SERVER["DOCUMENT_ROOT"]."/views/header.php";
 ?>
 <body>

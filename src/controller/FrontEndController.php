@@ -8,11 +8,11 @@ class FrontEndController{
     }
 
     static function getPost(){
-        $values = [];
+        $articles = [];
         $model = new FrontEndModel;
-        $values = $model->listPost();
+        $articles = $model->listPost();
 
-        return $values;
+        require_once PROJECTPATH . "/views/listView.php";
     }
 
     static function addPost($content) {
@@ -20,12 +20,13 @@ class FrontEndController{
         $model->insertPost($content);
     }
 
-    static function showPost($articleId) {
-        $values = [];
+    static function showPost() {
+        $article = [];
         $model = new FrontEndModel;
-        $values = $model->listPostById($articleId);
+        $article = $model->listPostById($_GET['articleId']);
 
-        return $values;
+        require_once PROJECTPATH . "/views/showView.php";
+        return $article;
     }
 
 }

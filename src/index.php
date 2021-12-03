@@ -14,12 +14,10 @@ switch ($path[0]) {
         require PROJECTPATH . "/views/addView.php";
         break;
     case '/addArticle':
-        PostController::addPost($_POST['content'], $_POST['title'], $_FILES['file']['name']);
-        require PROJECTPATH . "/views/listView.php";
+        PostController::addPost();
         break;
     case '/show':
-        FrontEndController::showPost($_GET['articleId']);
-        require PROJECTPATH . "/views/showView.php";
+        FrontEndController::showPost();
         break;
     case '/signup':
         require PROJECTPATH . "/views/signup.php";
@@ -28,8 +26,7 @@ switch ($path[0]) {
         if(!isset($_POST['admin'])){
             $_POST['admin'] = false;
         }
-        UserController::addUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass'], $_POST['admin']);
-        require PROJECTPATH . "/views/signup.php";
+        UserController::addUser();
         break;
     case '/logout':
         session_destroy();
@@ -39,7 +36,7 @@ switch ($path[0]) {
         require PROJECTPATH . "/views/login.php";
         break;
     case '/logUser':
-        UserController::logUser($_POST['email'], $_POST['pass']);
+        UserController::logUser();
         break;
     case '/delete':
         PostController::deletePost($_GET['articleId']);
@@ -51,7 +48,6 @@ switch ($path[0]) {
         break;
     case '/usersView':
         UserController::getUsers();
-        require PROJECTPATH . "/views/usersView.php";
         break;
     case '/deleteUser':
         UserController::deleteUser($_GET['id']);
@@ -62,7 +58,7 @@ switch ($path[0]) {
         require PROJECTPATH . "/views/usersView.php";
         break;
     default:
-        require PROJECTPATH . "/views/listView.php";
+        FrontEndController::getPost();
         break;
 }
 ?>

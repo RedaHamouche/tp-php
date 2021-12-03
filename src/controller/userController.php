@@ -2,16 +2,20 @@
 
 class UserController{
 
-    static function addUser($firstname, $lastname, $email, $pass, $admin) {
+    static function addUser() {
         $model = new UserModel;
         $flash = new FlashController;
 
-        $check_email = $model->checkEmail($email);
+        $articles = [];
+        $userModel = new FrontEndModel;
+        $articles = $userModel->listPost();
+
+        $check_email = $model->checkEmail($_POST['email']);
 
 
-        if($pass === $_POST['pass_verify']) {
-            $model->insertUser($firstname, $lastname, $email, $pass, $admin);
-            header("Location: /");
+        if($_POST['pass'] === $_POST['pass_verify']) {
+            $model->insertUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass'], $_POST['admin']);
+            require_once PROJECTPATH . "/views/listView.php";
         }
         else if ($check_email === false) {
             $flash->setFlash("L'email existe déja");
@@ -21,25 +25,28 @@ class UserController{
         }
     }
 
-    static function logUser($email, $pass) {
+    static function logUser() {
         $model = new UserModel;
         $flash = new FlashController;
 
-        $check_account = $model->checkAccount($email, $pass);
+        $articles = [];
+        $modelUser = new FrontEndModel;
+        $articles = $modelUser->listPost();
+
+        $check_account = $model->checkAccount($_POST['email'], $_POST['pass']);
         if($check_account == true) {
-            header("Location: /");
+            require_once PROJECTPATH . "/views/listView.php";
         } else {
             $flash->setFlash('Mauvais mot de passe et/ou email');
-            header("Location: /login");
+            require_once PROJECTPATH . "/views/login.php";
         }
     }
 
     static function getUsers(){
-        $values = [];
+        $users = [];
         $model = new UserModel;
-        $values = $model->listUsers();
-
-        return $values;
+        $users = $model->listUsers();
+        require_once PROJECTPATH . "/views/usersView.php";
     }
 
     static function deleteUser($id) {

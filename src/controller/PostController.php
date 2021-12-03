@@ -2,9 +2,13 @@
 
 class PostController{
 
-    static function addPost($content, $title, $file) {
+    static function addPost() {
         $model = new PostModel;
-        $model->insertPost($content, $title, $file);
+        $model->insertPost($_POST['content'], $_POST['title'], $_FILES['file']['name']);
+
+        $articles = [];
+        $modelUser = new FrontEndModel;
+        $articles = $modelUser->listPost();
 
         $tmpName = $_FILES['file']['tmp_name'];
         $name = $_FILES['file']['name'];
@@ -13,7 +17,7 @@ class PostController{
 
         move_uploaded_file($tmpName, PROJECTPATH .'/upload/'.$name);
 
-        header("Location: / ");
+        require_once PROJECTPATH . "/views/listView.php";
     }
 
     static function deletePost($id) {
