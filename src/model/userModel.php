@@ -22,12 +22,14 @@ class UserModel{
                 "administrator" => $admin
             ));
             $_SESSION['currentUser'] = $firstname . ' ' . $lastname;
+            $_SESSION['email'] = $email;
+            $_SESSION['admin'] = $admin;
         }
     }
 
     public function checkAccount($email, $pass){
         $bdd = data::dbConnect();
-        $member = $bdd->prepare("SELECT email, pass, firstname, lastname FROM member WHERE email = :email");
+        $member = $bdd->prepare("SELECT email, pass, firstname, lastname, administrator FROM member WHERE email = :email");
         $member->execute([
             'email' => $email,
         ]);
@@ -38,9 +40,52 @@ class UserModel{
         $ispasscorrect = password_verify($pass, $member_data['pass']);
         if($ispasscorrect == 1){
             $_SESSION['currentUser'] =  $member_data['firstname'] . ' ' .  $member_data['lastname'];
+            $_SESSION['admin'] = $member_data['administrator'];
+            $_SESSION['email'] = $email;
             return true;
         } else {
             return false;
         }
+    }
+    public function checkEmail($email){
+        $bdd = data::dbConnect();
+        $memberEmail = $bdd->prepare("SELECT email FROM member WHERE email = :email");
+        $memberEmail->execute([
+            'email' => $email,
+        ]);
+        $memberExist = $memberEmail->fetch();
+        if (!$memberExist){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function listUsers() {
+       
+        $bdd = data::dbConnect();
+    
+        $users_list = $bdd->query("SELECT * FROM member");
+
+        $users = $users_list->fetchAll();
+
+        return $users;
+    }
+
+    public function deleteUser($id) {
+       
+        $bdd = data::dbConnect();
+        $requete = $bdd->prepare('DELETE FROM member WHERE id = :id');
+        $requete->execute(array(
+            'id' => $id
+        ));
+    }
+    public function updateAdmin($id) {
+       
+        $bdd = data::dbConnect();
+        $requete = $bdd->prepare('UPDATE member SET administrator = "true" WHERE id = :id');
+        $requete->execute(array(
+            'id' => $id
+        ));
     }
 }

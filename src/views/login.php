@@ -6,10 +6,8 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/views/header.php";
   <?php if(FlashController::hasFlash()) : ?>
     <div class="alert alert-danger" role="alert">
       <?= FlashController::getFlash(); ?>
-    </div
+    </div>
   <?php endif; ?>
-  <div></div>
-
   <form action="/logUser" method="post">
     <label>Email : </label>
     <input type="email" name="email"/><br />

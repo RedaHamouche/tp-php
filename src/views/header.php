@@ -23,26 +23,30 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/addView">Ajouter un article <span class="sr-only">(current)</span></a>
-      </li>
-      
         <?php if(isset($_SESSION['currentUser'])) { ?>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Log out</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="/addView">Ajouter un article <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <p class="nav-link">Bonjour <?= $_SESSION['currentUser'] ?></p>
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link m-0">Bonjour <?= $_SESSION['currentUser'] ?></p>
             </li>
         <?php } else { ?>
             <li class="nav-item">
-                <a class="nav-link" href="/signup">Sign up</a>
+              <a class="nav-link" href="/signup">Sign up</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/login">Log in</a>
+              <a class="nav-link" href="/login">Log in</a>
             </li>
         <?php } ?>
       </li>
+      <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === "true") : ?>
+            <li class="nav-item">
+              <a href="/usersView" class="nav-link ml-10">User list</a>
+            </li>
+      <?php endif ?>
     </ul>
   </div>
 </nav>
