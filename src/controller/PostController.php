@@ -20,15 +20,15 @@ class PostController{
         require_once PROJECTPATH . "/views/listView.php";
     }
 
-    static function deletePost($id) {
+    static function deletePost() {
         $model = new PostModel;
-        $model->deletePost($id);
+        $model->deletePost($_GET['articleId']);
         header("Location: / ");
     }
 
-    static function updatePost($id, $title, $content) {
+    static function updatePost() {
         $model = new PostModel;
-        $model->updatePost($id, $title, $content);
+        $model->updatePost($_GET['articleId'], $_POST['content'], $_POST['title']);
         header("Location: / ");
     }
 }

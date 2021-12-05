@@ -10,6 +10,10 @@ class UserController{
         $userModel = new FrontEndModel;
         $articles = $userModel->listPost();
 
+        if(!isset($_POST['admin'])){
+            $_POST['admin'] = false;
+        }
+        
         $check_email = $model->checkEmail($_POST['email']);
 
 
@@ -49,16 +53,15 @@ class UserController{
         require_once PROJECTPATH . "/views/usersView.php";
     }
 
-    static function deleteUser($id) {
+    static function deleteUser() {
         $model = new UserModel;
-        $model->deleteUser($id);
+        $model->deleteUser($_GET['id']);
         header("Location: /usersView ");
     }
 
-    static function updateAdmin($id) {
+    static function updateAdmin() {
         $model = new UserModel;
-        $model->updateAdmin($id);
+        $model->updateAdmin($_GET['id']);
         header("Location: /usersView ");
     }
-
 }
