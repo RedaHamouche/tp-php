@@ -9,6 +9,14 @@ class ApiController {
 
         echo json_encode($articles);
     }
+    
+    static function getUsers(){
+        $users = [];
+        $model = new UserModel;
+        $users = $model->listUsers();
+
+        echo json_encode($users);
+    }
 }
 
 ?>

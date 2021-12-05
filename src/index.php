@@ -5,28 +5,6 @@ error_reporting(E_ALL);
 require_once $_SERVER["DOCUMENT_ROOT"]."/config/bootstrap.php";
 require($_SERVER["DOCUMENT_ROOT"]."/controller/FrontEndController.php");
 
-// include_once './php-router/Request.php';
-// include_once './php-router/Router.php';
-// $router = new Router(new Request);
-
-// $router->get('/test', function() {
-//     return <<<HTML
-//     <h1>Hello world</h1>
-//   HTML;
-//   });
-  
-  
-//   $router->get('/profile', function($request) {
-//     return <<<HTML
-//     <h1>Profile</h1>
-//   HTML;
-//   });
-  
-//   $router->post('/data', function($request) {
-  
-//     return json_encode($request->getBody());
-//   });
-
 $path = explode("?", $_SERVER['REQUEST_URI']);
 switch ($path[0]) {
     case '/ds':
@@ -72,8 +50,12 @@ switch ($path[0]) {
     case '/updateAdmin':
         UserController::updateAdmin();
         break;
-    case '/api':
+    case '/getPost':
         ApiController::getPost();
+        break;
+    case '/getUsers':
+        ApiController::getUsers();
+        break;
     default:
         FrontEndController::getPost();
         break;
