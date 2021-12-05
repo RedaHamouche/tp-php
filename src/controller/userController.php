@@ -16,7 +16,9 @@ class UserController{
         
         $check_email = $model->checkEmail($_POST['email']);
 
-
+        if(!isset($_POST['admin'])){
+            $_POST['admin'] = false;
+        }
         if($_POST['pass'] === $_POST['pass_verify']) {
             $model->insertUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass'], $_POST['admin']);
             require_once PROJECTPATH . "/views/listView.php";
