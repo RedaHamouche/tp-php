@@ -23,9 +23,6 @@ switch ($path[0]) {
         require PROJECTPATH . "/views/signup.php";
         break;
     case '/addUser':
-        if(!isset($_POST['admin'])){
-            $_POST['admin'] = false;
-        }
         UserController::addUser();
         break;
     case '/logout':
@@ -39,23 +36,19 @@ switch ($path[0]) {
         UserController::logUser();
         break;
     case '/delete':
-        PostController::deletePost($_GET['articleId']);
-        require PROJECTPATH . "/views/listView.php";
+        PostController::deletePost();
         break;
     case '/updateArticle':
-        PostController::updatePost($_GET['articleId'], $_POST['content'], $_POST['title']);
-        require PROJECTPATH . "/views/listView.php";
+        PostController::updatePost();
         break;
     case '/usersView':
         UserController::getUsers();
         break;
     case '/deleteUser':
-        UserController::deleteUser($_GET['id']);
-        require PROJECTPATH . "/views/usersView.php";
+        UserController::deleteUser();
         break;
     case '/updateAdmin':
-        UserController::updateAdmin($_GET['id']);
-        require PROJECTPATH . "/views/usersView.php";
+        UserController::updateAdmin();
         break;
     default:
         FrontEndController::getPost();

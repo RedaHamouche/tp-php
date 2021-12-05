@@ -12,7 +12,9 @@ class UserController{
 
         $check_email = $model->checkEmail($_POST['email']);
 
-
+        if(!isset($_POST['admin'])){
+            $_POST['admin'] = false;
+        }
         if($_POST['pass'] === $_POST['pass_verify']) {
             $model->insertUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass'], $_POST['admin']);
             require_once PROJECTPATH . "/views/listView.php";
@@ -49,15 +51,15 @@ class UserController{
         require_once PROJECTPATH . "/views/usersView.php";
     }
 
-    static function deleteUser($id) {
+    static function deleteUser() {
         $model = new UserModel;
-        $model->deleteUser($id);
+        $model->deleteUser($_GET['id']);
         header("Location: /usersView ");
     }
 
-    static function updateAdmin($id) {
+    static function updateAdmin() {
         $model = new UserModel;
-        $model->updateAdmin($id);
+        $model->updateAdmin($_GET['id']);
         header("Location: /usersView ");
     }
 
